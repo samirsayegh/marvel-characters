@@ -29,6 +29,9 @@ dependencies {
     // RecyclerView
     compile 'com.android.support:recyclerview-v7:25.3.1'
 
+    // Logger
+    compile 'com.github.orhanobut:logger:1.12'
+
     // Butterknife Field and method binding for Android views
     compile 'com.jakewharton:butterknife:8.5.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'

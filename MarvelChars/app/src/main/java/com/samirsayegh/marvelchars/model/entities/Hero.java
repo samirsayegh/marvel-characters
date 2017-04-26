@@ -15,4 +15,11 @@ public class Hero extends BaseContent {
     public void setId(int id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "Hero{" +
+                "id=" + id +
+                '}';
+    }
 }

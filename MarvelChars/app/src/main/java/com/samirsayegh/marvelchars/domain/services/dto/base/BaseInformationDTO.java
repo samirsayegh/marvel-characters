@@ -20,4 +20,28 @@ public class BaseInformationDTO {
     @SerializedName("thumbnail")
     @Expose
     private ThumbnailDTO thumbnail;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public ThumbnailDTO getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(ThumbnailDTO thumbnail) {
+        this.thumbnail = thumbnail;
+    }
 }

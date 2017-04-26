@@ -33,6 +33,10 @@ public class BaseDTO<T> {
     @Expose
     private DataDTO<T> data;
 
+    public T getDataValue() {
+        return data.getResults();
+    }
+
     public int getCode() {
         return code;
     }
