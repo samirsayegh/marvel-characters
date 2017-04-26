@@ -2,14 +2,13 @@ package com.samirsayegh.marvelchars.model.entities;
 
 /**
  * Created by yormirsamir.sayegh on 26/04/2017.
- *
  */
 
 public class BaseContent {
 
     private String name;
     private String description;
-    private String thumbnailPath;
+    private Thumbnail thumbnail;
 
     public String getName() {
         return name;
@@ -27,11 +26,15 @@ public class BaseContent {
         this.description = description;
     }
 
-    public String getThumbnailPath() {
-        return thumbnailPath;
+    public Thumbnail getThumbnail() {
+        return thumbnail;
     }
 
-    public void setThumbnailPath(String thumbnailPath) {
-        this.thumbnailPath = thumbnailPath;
+    public String getThumbnail(String size) {
+        return thumbnail.getPath(size);
+    }
+
+    public void setThumbnail(Thumbnail thumbnail) {
+        this.thumbnail = thumbnail;
     }
 }

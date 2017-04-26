@@ -1,7 +1,9 @@
 package com.samirsayegh.marvelchars.domain.services.parser;
 
 import com.samirsayegh.marvelchars.domain.services.dto.HeroDTO;
+import com.samirsayegh.marvelchars.domain.services.dto.base.ThumbnailDTO;
 import com.samirsayegh.marvelchars.model.entities.Hero;
+import com.samirsayegh.marvelchars.model.entities.Thumbnail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +20,13 @@ public class HeroParser {
             hero.setId(heroDTO.getId());
             hero.setName(heroDTO.getName() != null ? heroDTO.getName() : "");
             hero.setDescription(heroDTO.getDescription() != null ? heroDTO.getDescription() : "");
-            hero.setThumbnailPath(heroDTO.getThumbnail() != null &&
-                    heroDTO.getThumbnail().getPath() != null ?
-                    heroDTO.getThumbnail().getPath() : "");
+            Thumbnail thumbnail = new Thumbnail();
+            if (heroDTO.getThumbnail() != null) {
+                ThumbnailDTO thumbnailDTO = heroDTO.getThumbnail();
+                thumbnail.setPath(thumbnailDTO.getPath() != null ? thumbnailDTO.getPath() : "");
+                thumbnail.setExtension(thumbnailDTO.getExtension() != null ? thumbnailDTO.getExtension() : "");
+            }
+            hero.setThumbnail(thumbnail);
         }
         return hero;
     }
