@@ -1,10 +1,12 @@
 package com.samirsayegh.marvelchars.model.entities;
 
+import java.io.Serializable;
+
 /**
  * Created by yormirsamir.sayegh on 26/04/2017.
  */
 
-public class Hero extends BaseContent {
+public class Hero extends BaseContent implements Serializable {
 
     private int id;
 
@@ -20,6 +22,6 @@ public class Hero extends BaseContent {
     public String toString() {
         return "Hero{" +
                 "id=" + id +
-                '}';
+                '}' + super.toString();
     }
 }

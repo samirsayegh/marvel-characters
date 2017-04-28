@@ -5,9 +5,12 @@ package com.samirsayegh.marvelchars.view.base;
  */
 
 public interface BaseView {
+
     void showWaitingDialog();
 
     void hideWaitingDialog();
 
     void showMessage(String message);
+
+    boolean isWaiting();
 }

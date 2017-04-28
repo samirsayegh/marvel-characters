@@ -52,4 +52,9 @@ public abstract class BaseActivity extends Activity implements BaseView {
     public void showMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
+
+    @Override
+    public boolean isWaiting() {
+        return dialog != null && dialog.isShowing();
+    }
 }

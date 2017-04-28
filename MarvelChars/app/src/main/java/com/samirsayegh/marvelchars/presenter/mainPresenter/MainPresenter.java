@@ -3,10 +3,9 @@ package com.samirsayegh.marvelchars.presenter.mainPresenter;
 import com.samirsayegh.marvelchars.domain.services.characterService.CharacterService;
 import com.samirsayegh.marvelchars.domain.services.characterService.CharacterServiceResult;
 import com.samirsayegh.marvelchars.model.entities.Hero;
+import com.samirsayegh.marvelchars.model.entities.OffsetList;
 import com.samirsayegh.marvelchars.presenter.base.BasePresenter;
 import com.samirsayegh.marvelchars.view.main.MainView;
-
-import java.util.List;
 
 /**
  * Created by yormirsamir.sayegh on 26/04/2017.
@@ -14,8 +13,12 @@ import java.util.List;
 
 public class MainPresenter extends BasePresenter implements CharacterServiceResult {
 
+    private static final int OFFSET_STEP = 20;
+
     private final MainView view;
     private final CharacterService characterService;
+    private int currentOffset;
+    private int total;
 
     public MainPresenter(MainView view) {
         super(view);
@@ -23,14 +26,34 @@ public class MainPresenter extends BasePresenter implements CharacterServiceResu
         characterService = new CharacterService(this);
     }
 
-    public void updateCharacters() {
+    public void retrieveCharacters() {
         view.showWaitingDialog();
         characterService.getCharacters();
     }
 
+    private void saveListPosition(OffsetList<Hero> heroList) {
+        currentOffset = heroList.getOffset();
+        total = heroList.getTotal();
+    }
+
+    public void loadMoreElements() {
+        if(!view.isWaiting()) {
+            if(currentOffset + OFFSET_STEP < total) {
+                characterService.getCharactersOffset(currentOffset + OFFSET_STEP);
+            }
+        }
+    }
+
     @Override
-    public void heroLoaded(List<Hero> heroList) {
-        view.listLoaded(heroList);
+    public void newHeroList(OffsetList<Hero> heroList) {
+        saveListPosition(heroList);
+        view.listLoaded(heroList.getList());
         view.hideWaitingDialog();
+    }
+
+    @Override
+    public void offsetUpdated(OffsetList<Hero> heroList) {
+        saveListPosition(heroList);
+        view.listUpdated(heroList.getList());
     }
 }

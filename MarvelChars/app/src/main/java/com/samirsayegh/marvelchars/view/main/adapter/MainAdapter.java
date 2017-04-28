@@ -23,16 +23,26 @@ import butterknife.ButterKnife;
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
+    private MainAdapterListener mainAdapterListener;
     private List<Hero> list;
 
     public void setNewList(List<Hero> list) {
         this.list = list;
     }
 
+    public void setAddToList(List<Hero> heroList) {
+        list.addAll(heroList);
+    }
+
+    public void setMainAdapterListener(MainAdapterListener mainAdapterListener) {
+        this.mainAdapterListener = mainAdapterListener;
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.element_picture_name_description, parent, false);
+        view.setOnClickListener(mainAdapterListener);
         return new ViewHolder(view);
     }
 
@@ -52,6 +62,11 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     public int getItemCount() {
         return list != null ? list.size() : 0;
     }
+
+    public Hero getHero(int position) {
+        return list != null && list.size() > position ? list.get(position) : null;
+    }
+
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 

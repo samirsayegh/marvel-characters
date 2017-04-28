@@ -1,8 +1,11 @@
 package com.samirsayegh.marvelchars.domain.services.parser;
 
 import com.samirsayegh.marvelchars.domain.services.dto.HeroDTO;
+import com.samirsayegh.marvelchars.domain.services.dto.base.BaseDTO;
+import com.samirsayegh.marvelchars.domain.services.dto.base.DataDTO;
 import com.samirsayegh.marvelchars.domain.services.dto.base.ThumbnailDTO;
 import com.samirsayegh.marvelchars.model.entities.Hero;
+import com.samirsayegh.marvelchars.model.entities.OffsetList;
 import com.samirsayegh.marvelchars.model.entities.Thumbnail;
 
 import java.util.ArrayList;
@@ -31,12 +34,19 @@ public class HeroParser {
         return hero;
     }
 
-    public static List<Hero> toHeroList(List<HeroDTO> heroDTOList) {
+    public static OffsetList<Hero> toHeroList(BaseDTO<List<HeroDTO>> heroDTOList) {
+        OffsetList<Hero> offsetList = new OffsetList<>();
         List<Hero> heroList = new ArrayList<>();
-        for (HeroDTO heroDTO : heroDTOList) {
-            if (heroDTO != null)
-                heroList.add(toHero(heroDTO));
+        offsetList.setList(heroList);
+        DataDTO<List<HeroDTO>> dataDTO = heroDTOList.getData();
+        if (dataDTO != null) {
+            offsetList.setOffset(dataDTO.getOffset());
+            offsetList.setTotal(dataDTO.getTotal());
+            for (HeroDTO heroDTO : dataDTO.getResults()) {
+                if (heroDTO != null)
+                    heroList.add(toHero(heroDTO));
+            }
         }
-        return heroList;
+        return offsetList;
     }
 }

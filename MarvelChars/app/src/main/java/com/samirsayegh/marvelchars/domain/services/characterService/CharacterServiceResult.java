@@ -2,8 +2,7 @@ package com.samirsayegh.marvelchars.domain.services.characterService;
 
 import com.samirsayegh.marvelchars.domain.services.base.BaseServiceResult;
 import com.samirsayegh.marvelchars.model.entities.Hero;
-
-import java.util.List;
+import com.samirsayegh.marvelchars.model.entities.OffsetList;
 
 /**
  * Created by yormirsamir.sayegh on 26/04/2017.
@@ -11,6 +10,8 @@ import java.util.List;
 
 public interface CharacterServiceResult extends BaseServiceResult {
 
-    void heroLoaded(List<Hero> heroList);
+    void newHeroList(OffsetList<Hero> heroList);
+
+    void offsetUpdated(OffsetList<Hero> heroList);
 
 }

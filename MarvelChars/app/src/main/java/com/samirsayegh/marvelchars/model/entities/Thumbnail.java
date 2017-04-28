@@ -1,10 +1,12 @@
 package com.samirsayegh.marvelchars.model.entities;
 
+import java.io.Serializable;
+
 /**
  * Created by yormirsamir.sayegh on 26/04/2017.
  */
 
-public class Thumbnail {
+public class Thumbnail implements Serializable {
 
     public static final String STANDARD_SMALL = "standard_small";
     public static final String STANDARD_MEDIUM = "standard_medium";

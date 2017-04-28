@@ -8,6 +8,8 @@ import java.util.List;
 
 public class HeroDescription extends Hero {
 
+    private int comicCount;
+    private int eventCount;
     private List<BaseContent> comicList;
     private List<BaseContent> eventList;
 
@@ -25,5 +27,21 @@ public class HeroDescription extends Hero {
 
     public void setEventList(List<BaseContent> eventList) {
         this.eventList = eventList;
+    }
+
+    public int getComicCount() {
+        return comicCount;
+    }
+
+    public void setComicCount(int comicCount) {
+        this.comicCount = comicCount;
+    }
+
+    public int getEventCount() {
+        return eventCount;
+    }
+
+    public void setEventCount(int eventCount) {
+        this.eventCount = eventCount;
     }
 }
