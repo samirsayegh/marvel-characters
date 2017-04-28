@@ -1,7 +1,9 @@
-package com.samirsayegh.marvelchars.view.main.adapter;
+package com.samirsayegh.marvelchars.view.components;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+
+import com.samirsayegh.marvelchars.view.main.adapter.MainAdapterListener;
 
 /**
  * Created by yormirsamir.sayegh on 28/04/2017.

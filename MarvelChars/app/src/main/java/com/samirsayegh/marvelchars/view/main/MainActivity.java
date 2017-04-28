@@ -12,7 +12,7 @@ import com.samirsayegh.marvelchars.presenter.mainPresenter.MainPresenter;
 import com.samirsayegh.marvelchars.view.base.BaseActivity;
 import com.samirsayegh.marvelchars.view.main.adapter.MainAdapter;
 import com.samirsayegh.marvelchars.view.main.adapter.MainAdapterListener;
-import com.samirsayegh.marvelchars.view.main.adapter.RecyclerScrollListener;
+import com.samirsayegh.marvelchars.view.components.RecyclerScrollListener;
 
 import java.util.List;
 
@@ -42,6 +42,12 @@ public class MainActivity extends BaseActivity implements MainView, MainAdapterL
     @Override
     protected void init() {
         mainPresenter.retrieveCharacters();
+        setTitle(R.string.heroes);
+        initRecyclerView();
+
+    }
+
+    private void initRecyclerView() {
         recyclerView.setHasFixedSize(false);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -84,5 +90,6 @@ public class MainActivity extends BaseActivity implements MainView, MainAdapterL
         int position = recyclerView.getChildLayoutPosition(v);
         Hero hero = mainAdapter.getHero(position);
         Logger.i(hero.toString());
+        navigateWithExtra(EXTRA_HERO, hero);
     }
 }

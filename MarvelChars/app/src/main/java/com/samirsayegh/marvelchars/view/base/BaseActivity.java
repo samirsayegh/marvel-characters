@@ -1,9 +1,14 @@
 package com.samirsayegh.marvelchars.view.base;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
+
+import com.samirsayegh.marvelchars.view.heroDetails.HeroDetailsActivity;
+
+import java.io.Serializable;
 
 import butterknife.ButterKnife;
 
@@ -11,7 +16,9 @@ import butterknife.ButterKnife;
  * Created by yormirsamir.sayegh on 26/04/2017.
  */
 
-public abstract class BaseActivity extends Activity implements BaseView {
+public abstract class BaseActivity extends AppCompatActivity implements BaseView {
+
+    protected static final String EXTRA_HERO = "EXTRA_HERO";
 
     protected int layoutId;
     protected ProgressDialog dialog;
@@ -25,6 +32,12 @@ public abstract class BaseActivity extends Activity implements BaseView {
     }
 
     protected abstract void init();
+
+    protected void navigateWithExtra(String extra, Serializable serializable) {
+        Intent intent = new Intent(this, HeroDetailsActivity.class);
+        intent.putExtra(extra, serializable);
+        startActivity(intent);
+    }
 
     @Override
     public void showWaitingDialog() {
