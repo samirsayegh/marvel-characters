@@ -1,8 +1,8 @@
-package com.samirsayegh.marvelchars.domain.services.base;
+package com.samirsayegh.marvelchars.model.services.base;
 
 import com.google.gson.GsonBuilder;
-import com.samirsayegh.marvelchars.domain.services.Api;
-import com.samirsayegh.marvelchars.model.utils.HashConverter;
+import com.samirsayegh.marvelchars.domain.utils.HashConverter;
+import com.samirsayegh.marvelchars.model.services.Api;
 
 import java.io.IOException;
 import java.util.Calendar;

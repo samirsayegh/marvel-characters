@@ -1,12 +1,12 @@
-package com.samirsayegh.marvelchars.domain.services.parser;
+package com.samirsayegh.marvelchars.model.services.parser;
 
-import com.samirsayegh.marvelchars.domain.services.dto.HeroDTO;
-import com.samirsayegh.marvelchars.domain.services.dto.base.BaseDTO;
-import com.samirsayegh.marvelchars.domain.services.dto.base.DataDTO;
-import com.samirsayegh.marvelchars.domain.services.dto.base.ThumbnailDTO;
-import com.samirsayegh.marvelchars.model.entities.Hero;
-import com.samirsayegh.marvelchars.model.entities.OffsetList;
-import com.samirsayegh.marvelchars.model.entities.Thumbnail;
+import com.samirsayegh.marvelchars.domain.entities.Hero;
+import com.samirsayegh.marvelchars.domain.entities.OffsetList;
+import com.samirsayegh.marvelchars.domain.entities.Thumbnail;
+import com.samirsayegh.marvelchars.model.services.dto.HeroDTO;
+import com.samirsayegh.marvelchars.model.services.dto.base.BaseDTO;
+import com.samirsayegh.marvelchars.model.services.dto.base.DataDTO;
+import com.samirsayegh.marvelchars.model.services.dto.base.ThumbnailDTO;
 
 import java.util.ArrayList;
 import java.util.List;

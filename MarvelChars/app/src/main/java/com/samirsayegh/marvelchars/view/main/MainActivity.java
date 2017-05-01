@@ -7,12 +7,12 @@ import android.widget.EditText;
 
 import com.orhanobut.logger.Logger;
 import com.samirsayegh.marvelchars.R;
-import com.samirsayegh.marvelchars.model.entities.Hero;
+import com.samirsayegh.marvelchars.domain.entities.Hero;
 import com.samirsayegh.marvelchars.presenter.mainPresenter.MainPresenter;
 import com.samirsayegh.marvelchars.view.base.BaseActivity;
+import com.samirsayegh.marvelchars.view.components.RecyclerScrollListener;
 import com.samirsayegh.marvelchars.view.main.adapter.MainAdapter;
 import com.samirsayegh.marvelchars.view.main.adapter.MainAdapterListener;
-import com.samirsayegh.marvelchars.view.components.RecyclerScrollListener;
 
 import java.util.List;
 
@@ -78,6 +78,16 @@ public class MainActivity extends BaseActivity implements MainView, MainAdapterL
 
             }
         });
+    }
+
+    @Override
+    public boolean isLoadingMoreItems() {
+        return recyclerScrollListener.isLoading();
+    }
+
+    @Override
+    public void stopLoading() {
+        recyclerScrollListener.loaded();
     }
 
     @Override

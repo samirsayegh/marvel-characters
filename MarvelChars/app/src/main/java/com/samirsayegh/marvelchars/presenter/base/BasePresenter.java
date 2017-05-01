@@ -1,6 +1,6 @@
 package com.samirsayegh.marvelchars.presenter.base;
 
-import com.samirsayegh.marvelchars.domain.services.base.BaseServiceResult;
+import com.samirsayegh.marvelchars.model.services.base.BaseServiceResult;
 import com.samirsayegh.marvelchars.view.base.BaseView;
 
 /**

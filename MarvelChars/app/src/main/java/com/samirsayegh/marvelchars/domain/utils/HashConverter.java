@@ -1,4 +1,4 @@
-package com.samirsayegh.marvelchars.model.utils;
+package com.samirsayegh.marvelchars.domain.utils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

@@ -1,8 +1,9 @@
-package com.samirsayegh.marvelchars.domain.services;
+package com.samirsayegh.marvelchars.model.services;
 
-import com.samirsayegh.marvelchars.domain.services.dto.HeroDTO;
-import com.samirsayegh.marvelchars.domain.services.dto.TitleDTO;
-import com.samirsayegh.marvelchars.domain.services.dto.base.BaseDTO;
+
+import com.samirsayegh.marvelchars.model.services.dto.HeroDTO;
+import com.samirsayegh.marvelchars.model.services.dto.TitleDTO;
+import com.samirsayegh.marvelchars.model.services.dto.base.BaseDTO;
 
 import java.util.List;
 

@@ -1,8 +1,8 @@
-package com.samirsayegh.marvelchars.domain.services.dto;
+package com.samirsayegh.marvelchars.model.services.dto;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.samirsayegh.marvelchars.domain.services.dto.base.BaseInformationDTO;
+import com.samirsayegh.marvelchars.model.services.dto.base.BaseInformationDTO;
 
 /**
  * Created by yormirsamir.sayegh on 26/04/2017.

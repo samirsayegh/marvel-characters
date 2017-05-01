@@ -1,9 +1,9 @@
 package com.samirsayegh.marvelchars.presenter.mainPresenter;
 
-import com.samirsayegh.marvelchars.domain.services.characterService.CharacterService;
-import com.samirsayegh.marvelchars.domain.services.characterService.CharacterServiceResult;
-import com.samirsayegh.marvelchars.model.entities.Hero;
-import com.samirsayegh.marvelchars.model.entities.OffsetList;
+import com.samirsayegh.marvelchars.domain.entities.Hero;
+import com.samirsayegh.marvelchars.domain.entities.OffsetList;
+import com.samirsayegh.marvelchars.model.services.characterService.CharacterService;
+import com.samirsayegh.marvelchars.model.services.characterService.CharacterServiceResult;
 import com.samirsayegh.marvelchars.presenter.base.BasePresenter;
 import com.samirsayegh.marvelchars.view.main.MainView;
 
@@ -55,5 +55,19 @@ public class MainPresenter extends BasePresenter implements CharacterServiceResu
     public void offsetUpdated(OffsetList<Hero> heroList) {
         saveListPosition(heroList);
         view.listUpdated(heroList.getList());
+    }
+
+    @Override
+    public void noNetwork(String message) {
+        super.noNetwork(message);
+        if(view.isLoadingMoreItems())
+            view.stopLoading();
+    }
+
+    @Override
+    public void error(String message) {
+        super.error(message);
+        if(view.isLoadingMoreItems())
+            view.stopLoading();
     }
 }

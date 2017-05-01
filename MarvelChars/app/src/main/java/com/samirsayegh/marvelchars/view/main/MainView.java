@@ -1,7 +1,6 @@
 package com.samirsayegh.marvelchars.view.main;
 
-import com.samirsayegh.marvelchars.model.entities.Hero;
-import com.samirsayegh.marvelchars.model.entities.OffsetList;
+import com.samirsayegh.marvelchars.domain.entities.Hero;
 import com.samirsayegh.marvelchars.view.base.BaseView;
 
 import java.util.List;
@@ -16,4 +15,7 @@ public interface MainView extends BaseView {
 
     void listUpdated(List<Hero> heroList);
 
+    boolean isLoadingMoreItems();
+
+    void stopLoading();
 }

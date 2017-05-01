@@ -1,4 +1,4 @@
-package com.samirsayegh.marvelchars.domain.services.dto;
+package com.samirsayegh.marvelchars.model.services.dto;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

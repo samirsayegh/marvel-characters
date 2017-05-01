@@ -11,7 +11,7 @@ import com.samirsayegh.marvelchars.view.main.adapter.MainAdapterListener;
 
 public class RecyclerScrollListener extends RecyclerView.OnScrollListener {
 
-    private static final int THRESHOLD = 2;
+    private static final int THRESHOLD = 4;
 
     private final LinearLayoutManager linearLayoutManager;
     private final MainAdapterListener mainAdapterListener;
@@ -43,5 +43,9 @@ public class RecyclerScrollListener extends RecyclerView.OnScrollListener {
 
     public void loaded() {
         loading = false;
+    }
+
+    public boolean isLoading() {
+        return loading;
     }
 }

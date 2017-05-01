@@ -1,4 +1,4 @@
-package com.samirsayegh.marvelchars.model.entities;
+package com.samirsayegh.marvelchars.domain.entities;
 
 import java.util.List;
 

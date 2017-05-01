@@ -8,8 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.samirsayegh.marvelchars.R;
-import com.samirsayegh.marvelchars.model.entities.Hero;
-import com.samirsayegh.marvelchars.model.entities.Thumbnail;
+import com.samirsayegh.marvelchars.domain.entities.Hero;
+import com.samirsayegh.marvelchars.domain.entities.Thumbnail;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

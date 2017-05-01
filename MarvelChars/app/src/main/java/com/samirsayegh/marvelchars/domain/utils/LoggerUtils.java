@@ -1,4 +1,4 @@
-package com.samirsayegh.marvelchars.model.utils;
+package com.samirsayegh.marvelchars.domain.utils;
 
 /**
  * Created by yormirsamir.sayegh on 26/04/2017.

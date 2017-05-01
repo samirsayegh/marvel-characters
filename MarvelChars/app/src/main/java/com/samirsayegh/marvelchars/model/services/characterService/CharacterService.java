@@ -1,11 +1,11 @@
-package com.samirsayegh.marvelchars.domain.services.characterService;
+package com.samirsayegh.marvelchars.model.services.characterService;
 
 import com.orhanobut.logger.Logger;
-import com.samirsayegh.marvelchars.domain.services.base.BaseService;
-import com.samirsayegh.marvelchars.domain.services.dto.HeroDTO;
-import com.samirsayegh.marvelchars.domain.services.dto.base.BaseDTO;
-import com.samirsayegh.marvelchars.domain.services.parser.HeroParser;
-import com.samirsayegh.marvelchars.model.utils.LoggerUtils;
+import com.samirsayegh.marvelchars.domain.utils.LoggerUtils;
+import com.samirsayegh.marvelchars.model.services.base.BaseService;
+import com.samirsayegh.marvelchars.model.services.dto.HeroDTO;
+import com.samirsayegh.marvelchars.model.services.dto.base.BaseDTO;
+import com.samirsayegh.marvelchars.model.services.parser.HeroParser;
 
 import java.util.List;
 
