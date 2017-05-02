@@ -1,5 +1,7 @@
 package com.samirsayegh.marvelchars.model.services.characterService;
 
+import android.support.annotation.NonNull;
+
 import com.orhanobut.logger.Logger;
 import com.samirsayegh.marvelchars.domain.utils.LoggerUtils;
 import com.samirsayegh.marvelchars.model.services.base.BaseService;
@@ -26,15 +28,16 @@ public class CharacterService extends BaseService {
         this.characterServiceResult = characterServiceResult;
     }
 
-    public void getCharacters() {
-        api.getCharacters().enqueue(new Callback<BaseDTO<List<HeroDTO>>>() {
+    @NonNull
+    private Callback<BaseDTO<List<HeroDTO>>> getCallback(final boolean isNew) {
+        return new Callback<BaseDTO<List<HeroDTO>>>() {
             @Override
             public void onResponse(Call<BaseDTO<List<HeroDTO>>> call, Response<BaseDTO<List<HeroDTO>>> response) {
                 Logger.d(LoggerUtils.JOIN + " RESPONSE");
                 if (response.isSuccessful()) {
                     Logger.d(LoggerUtils.SUCCESS);
                     if (characterServiceResult != null) {
-                        characterServiceResult.newHeroList(HeroParser.toHeroList(response.body()));
+                        characterServiceResult.heroList(HeroParser.toHeroList(response.body()), isNew);
                     }
                 } else {
                     Logger.d(LoggerUtils.FAILED);
@@ -51,18 +54,35 @@ public class CharacterService extends BaseService {
                     characterServiceResult.error(t.getMessage());
                 }
             }
-        });
+        };
+    }
+
+    public void getCharacters() {
+        api.getCharacters().enqueue(getCallback(true));
     }
 
     public void getCharactersOffset(int offset) {
-        api.getCharactersOffset(offset).enqueue(new Callback<BaseDTO<List<HeroDTO>>>() {
+        api.getCharacters(offset).enqueue(getCallback(false));
+    }
+
+    public void getCharactersStartingWith(String startingWith) {
+        api.getCharactersStartingWith(startingWith).enqueue(getCallbackStartingWith(true));
+    }
+
+    public void getCharactersStartingWith(String startingWith, int offset) {
+        api.getCharactersStartingWith(startingWith, offset).enqueue(getCallbackStartingWith(false));
+    }
+
+    @NonNull
+    private Callback<BaseDTO<List<HeroDTO>>> getCallbackStartingWith(final boolean isNew) {
+        return new Callback<BaseDTO<List<HeroDTO>>>() {
             @Override
             public void onResponse(Call<BaseDTO<List<HeroDTO>>> call, Response<BaseDTO<List<HeroDTO>>> response) {
                 Logger.d(LoggerUtils.JOIN + " RESPONSE");
                 if (response.isSuccessful()) {
                     Logger.d(LoggerUtils.SUCCESS);
                     if (characterServiceResult != null) {
-                        characterServiceResult.offsetUpdated(HeroParser.toHeroList(response.body()));
+                        characterServiceResult.heroListStartingWith(HeroParser.toHeroList(response.body()), isNew);
                     }
                 } else {
                     Logger.d(LoggerUtils.FAILED);
@@ -79,7 +99,7 @@ public class CharacterService extends BaseService {
                     characterServiceResult.error(t.getMessage());
                 }
             }
-        });
+        };
     }
 
     public void setCharacterServiceResult(CharacterServiceResult characterServiceResult) {

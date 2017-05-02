@@ -9,10 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.orhanobut.logger.Logger;
 import com.samirsayegh.marvelchars.R;
+import com.samirsayegh.marvelchars.domain.entities.BaseContent;
 import com.samirsayegh.marvelchars.view.components.RecyclerScrollListener;
 import com.samirsayegh.marvelchars.view.heroDetails.fragments.adapter.ComicsEventsAdapter;
 import com.samirsayegh.marvelchars.view.main.adapter.MainAdapterListener;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,12 +27,18 @@ import butterknife.ButterKnife;
 
 public class ComicsEventsFragment extends Fragment implements MainAdapterListener {
 
+    private final ComicsEventsAdapter comicsEventsAdapter;
     private RecyclerScrollListener recyclerScrollListener;
-    private ComicsEventsAdapter comicsEventsAdapter;
+    private ComicEventsListener comicEventsListener;
     private int type;
 
     @BindView(R.id.recyclerViewComicEvents)
     RecyclerView recyclerView;
+
+    public ComicsEventsFragment() {
+        comicsEventsAdapter = new ComicsEventsAdapter();
+        comicsEventsAdapter.setMainAdapterListener(this);
+    }
 
     @Nullable
     @Override
@@ -40,7 +50,7 @@ public class ComicsEventsFragment extends Fragment implements MainAdapterListene
     }
 
     private void initRecyclerView() {
-        recyclerView.setHasFixedSize(true);
+        recyclerView.setHasFixedSize(false);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerScrollListener = new RecyclerScrollListener(linearLayoutManager, this);
@@ -52,9 +62,41 @@ public class ComicsEventsFragment extends Fragment implements MainAdapterListene
         this.type = type;
     }
 
+    public void setComicEventsListener(ComicEventsListener comicEventsListener) {
+        this.comicEventsListener = comicEventsListener;
+    }
+
+    public void listLoaded(List<BaseContent> baseContents) {
+        try {
+            comicsEventsAdapter.setNewList(baseContents);
+            comicsEventsAdapter.notifyDataSetChanged();
+        } catch (Exception e) {
+            Logger.d("Adapter not visible yet");
+        }
+    }
+
+    public void listUpdated(final List<BaseContent> baseContents) {
+        try {
+            comicsEventsAdapter.setAddToList(baseContents);
+            recyclerScrollListener.loaded();
+            comicsEventsAdapter.notifyDataSetChanged();
+        } catch (Exception e) {
+            Logger.d("Adapter not visible yet");
+        }
+    }
+
+    public void stopLoading() {
+        if (recyclerScrollListener != null)
+            recyclerScrollListener.loaded();
+    }
+
+    public boolean isLoadingMoreItems() {
+        return recyclerScrollListener != null && recyclerScrollListener.isLoading();
+    }
+
     @Override
     public void loadMoreElements() {
-
+        comicEventsListener.loadMoreElements(type);
     }
 
     @Override

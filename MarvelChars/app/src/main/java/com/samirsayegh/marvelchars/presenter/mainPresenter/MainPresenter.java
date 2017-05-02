@@ -9,26 +9,36 @@ import com.samirsayegh.marvelchars.view.main.MainView;
 
 /**
  * Created by yormirsamir.sayegh on 26/04/2017.
+ * Samir Dev
  */
 
 public class MainPresenter extends BasePresenter implements CharacterServiceResult {
 
-    private static final int OFFSET_STEP = 20;
-
     private final MainView view;
     private final CharacterService characterService;
+
     private int currentOffset;
     private int total;
+    private String startingWith;
 
     public MainPresenter(MainView view) {
         super(view);
         this.view = view;
         characterService = new CharacterService(this);
+        startingWith = "";
     }
 
     public void retrieveCharacters() {
         view.showWaitingDialog();
         characterService.getCharacters();
+    }
+
+    public void retrieveCharactersStartingWith(String startingWith) {
+        this.startingWith = startingWith.trim();
+        if (this.startingWith.isEmpty())
+            characterService.getCharacters();
+        else
+            characterService.getCharactersStartingWith(startingWith);
     }
 
     private void saveListPosition(OffsetList<Hero> heroList) {
@@ -37,37 +47,49 @@ public class MainPresenter extends BasePresenter implements CharacterServiceResu
     }
 
     public void loadMoreElements() {
-        if(!view.isWaiting()) {
-            if(currentOffset + OFFSET_STEP < total) {
-                characterService.getCharactersOffset(currentOffset + OFFSET_STEP);
+        if (!view.isWaiting()) {
+            if (currentOffset + OFFSET_STEP < total) {
+                if (startingWith.isEmpty())
+                    characterService.getCharactersOffset(currentOffset + OFFSET_STEP);
+                else
+                    characterService.getCharactersStartingWith(startingWith, currentOffset + OFFSET_STEP);
             }
         }
     }
 
     @Override
-    public void newHeroList(OffsetList<Hero> heroList) {
+    public void heroList(OffsetList<Hero> heroList, boolean isNew) {
         saveListPosition(heroList);
-        view.listLoaded(heroList.getList());
-        view.hideWaitingDialog();
+        if (isNew) {
+            view.listLoaded(heroList.getList());
+            view.hideWaitingDialog();
+        } else {
+            view.listUpdated(heroList.getList());
+        }
     }
 
     @Override
-    public void offsetUpdated(OffsetList<Hero> heroList) {
+    public void heroListStartingWith(OffsetList<Hero> heroList, boolean isNew) {
         saveListPosition(heroList);
-        view.listUpdated(heroList.getList());
+        if (isNew) {
+            view.listLoaded(heroList.getList());
+            view.hideWaitingDialog();
+        } else {
+            view.listUpdated(heroList.getList());
+        }
     }
 
     @Override
     public void noNetwork(String message) {
         super.noNetwork(message);
-        if(view.isLoadingMoreItems())
+        if (view.isLoadingMoreItems())
             view.stopLoading();
     }
 
     @Override
     public void error(String message) {
         super.error(message);
-        if(view.isLoadingMoreItems())
+        if (view.isLoadingMoreItems())
             view.stopLoading();
     }
 }

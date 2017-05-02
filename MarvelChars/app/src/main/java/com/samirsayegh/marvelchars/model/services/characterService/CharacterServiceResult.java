@@ -11,8 +11,8 @@ import com.samirsayegh.marvelchars.model.services.base.BaseServiceResult;
 
 public interface CharacterServiceResult extends BaseServiceResult {
 
-    void newHeroList(OffsetList<Hero> heroList);
+    void heroList(OffsetList<Hero> heroList, boolean isNew);
 
-    void offsetUpdated(OffsetList<Hero> heroList);
+    void heroListStartingWith(OffsetList<Hero> heroOffsetList, boolean isNew);
 
 }

@@ -64,10 +64,9 @@ public class ComicsEventsAdapter extends RecyclerView.Adapter<ComicsEventsAdapte
         return list != null ? list.size() : 0;
     }
 
-    public BaseContent getHero(int position) {
+    public BaseContent getBaseContent(int position) {
         return list != null && list.size() > position ? list.get(position) : null;
     }
-
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 

@@ -3,4 +3,6 @@
     <string name="comics">Comics</string>
     <string name="events">Events</string>
     <string name="heroes">Heroes</string>
+    <string name="comics_number">Comics(%1$d)</string>
+    <string name="events_number">Events(%1$d)</string>
 </resources>

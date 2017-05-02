@@ -7,6 +7,7 @@ import com.samirsayegh.marvelchars.view.main.adapter.MainAdapterListener;
 
 /**
  * Created by yormirsamir.sayegh on 28/04/2017.
+ * Samir Dev
  */
 
 public class RecyclerScrollListener extends RecyclerView.OnScrollListener {

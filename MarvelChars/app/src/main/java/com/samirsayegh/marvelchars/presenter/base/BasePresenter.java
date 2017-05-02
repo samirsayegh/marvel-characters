@@ -9,6 +9,8 @@ import com.samirsayegh.marvelchars.view.base.BaseView;
 
 public class BasePresenter implements BaseServiceResult {
 
+    protected static final int OFFSET_STEP = 20;
+
     private BaseView baseView;
 
     public BasePresenter(BaseView baseView) {

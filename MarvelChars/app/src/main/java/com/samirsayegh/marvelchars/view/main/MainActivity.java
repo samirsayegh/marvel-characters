@@ -2,6 +2,8 @@ package com.samirsayegh.marvelchars.view.main;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 
@@ -21,9 +23,9 @@ import butterknife.BindView;
 /**
  * Created by yormirsamir.sayegh on 26/04/2017.
  */
-public class MainActivity extends BaseActivity implements MainView, MainAdapterListener {
+public class MainActivity extends BaseActivity implements MainView, MainAdapterListener, TextWatcher {
 
-    private MainPresenter mainPresenter;
+    private final MainPresenter mainPresenter;
     private MainAdapter mainAdapter;
     private RecyclerScrollListener recyclerScrollListener;
 
@@ -44,7 +46,7 @@ public class MainActivity extends BaseActivity implements MainView, MainAdapterL
         mainPresenter.retrieveCharacters();
         setTitle(R.string.heroes);
         initRecyclerView();
-
+        editText.addTextChangedListener(this);
     }
 
     private void initRecyclerView() {
@@ -63,6 +65,7 @@ public class MainActivity extends BaseActivity implements MainView, MainAdapterL
             public void run() {
                 mainAdapter.setNewList(heroList);
                 mainAdapter.notifyDataSetChanged();
+                recyclerScrollListener.loaded();
             }
         });
     }
@@ -101,5 +104,18 @@ public class MainActivity extends BaseActivity implements MainView, MainAdapterL
         Hero hero = mainAdapter.getHero(position);
         Logger.i(hero.toString());
         navigateWithExtra(EXTRA_HERO, hero);
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        mainPresenter.retrieveCharactersStartingWith(s.toString());
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
     }
 }
